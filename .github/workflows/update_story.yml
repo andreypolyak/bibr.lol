@@ -1,0 +1,36 @@
+name: Update Bibr Story
+
+on:
+    schedule:
+        - cron: "0 0 * * *" # Runs at 00:00 UTC every day
+    workflow_dispatch: # Allows manual run
+
+jobs:
+    update-story:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out the repository
+              uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.9"
+
+            - name: Install dependencies
+              run: pip install openai
+
+            - name: Generate new story
+              env:
+                  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+              run: |
+                  python generate_story.py
+
+            - name: Commit and push changes
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git add index.html
+                  git commit -m "Daily story update [skip ci]"
+                  git push
