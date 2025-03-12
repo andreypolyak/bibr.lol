@@ -1,0 +1,22 @@
+body {
+    font-family: sans-serif;
+    margin: 3rem;
+    text-align: center;
+    background: #fafad2; /* A playful light color */
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+#story {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    width: 60%;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 2px dashed orange;
+    background: #fff8dc;
+}
