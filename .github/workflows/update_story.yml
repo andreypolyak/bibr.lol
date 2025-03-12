@@ -2,16 +2,22 @@ name: Update Bibr Story
 
 on:
     schedule:
-        - cron: "0 0 * * *" # Runs at 00:00 UTC every day
-    workflow_dispatch: # Allows manual run
+        - cron: "0 0 * * *"
+    workflow_dispatch:
 
 jobs:
     update-story:
         runs-on: ubuntu-latest
 
+        # <-- Add this block to allow the job to push commits
+        permissions:
+            contents: write
+
         steps:
-            - name: Check out the repository
+            - name: Check out repository
               uses: actions/checkout@v3
+              with:
+                  persist-credentials: true # Important so the job can use the token to push
 
             - name: Set up Python
               uses: actions/setup-python@v4
