@@ -1,6 +1,6 @@
 import os
 
-import openai
+from openai import OpenAI
 
 
 def generate_bibr_story():
@@ -10,7 +10,9 @@ def generate_bibr_story():
     wearing blue jeans jumpsuit, describing
     what he did today.
     """
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    client = OpenAI(
+        api_key=os.environ.get("OPENAI_API_KEY"),
+    )
 
     # Feel free to adjust the prompt to your taste
     prompt_text = (
@@ -18,16 +20,14 @@ def generate_bibr_story():
         "в голубом джинсовом комбинезоне. Описывай, что Бибр сегодня сделал забавного и удивительного."
     )
 
-    response = openai.Completion.create(
-        model="gpt-4o-mini",  # or whatever model name you prefer
-        prompt=prompt_text,
-        max_tokens=200,  # Just enough for 50 words
+    response = client.responses.create(
+        model="gpt-4o-mini",
+        input=prompt_text,
         temperature=0.7,
+        max_output_tokens=200,
     )
 
-    # Extract text
-    story = response.choices[0].text.strip()
-    return story
+    return response.output_text
 
 
 def update_index_html(story_text):
