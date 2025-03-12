@@ -1,22 +1,48 @@
-body {
-    font-family: sans-serif;
-    margin: 3rem;
-    text-align: center;
-    background: #fafad2; /* A playful light color */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 #story {
-    font-size: 1.25rem;
-    line-height: 1.5;
-    width: 60%;
-    margin: 0 auto;
-    padding: 1rem;
-    border: 2px dashed orange;
-    background: #fff8dc;
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+#story p {
+    font-size: 2.2rem;
+    line-height: 1.6;
+    font-weight: 400;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    #story p {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #story p {
+        font-size: 1.5rem;
+    }
+
+    #story {
+        padding: 25px;
+    }
 }
