@@ -4,24 +4,18 @@ from openai import OpenAI
 
 
 def generate_bibr_story():
-    """
-    Generate a short 50-word story in Russian
-    about an orange plush beaver named Bibr
-    wearing blue jeans jumpsuit, describing
-    what he did today.
-    """
     client = OpenAI(
         api_key=os.environ.get("OPENAI_API_KEY"),
     )
 
-    # Feel free to adjust the prompt to your taste
-    prompt_text = (
-        "Составь короткую историю ровно на 50 слов по-русски о рыжем плюшевом бобре по имени Бибр "
-        "в голубом джинсовом комбинезоне. Описывай, что Бибр сегодня сделал забавного и удивительного. "
-        "Пусть история будет неожиданной и иногда даже шокирующей. Не стесняйся использовать юмор и фантазию. "
-        "С вероятностью 10% добавляй в историю что-то, что должно пугать или шокировать читателя. "
-        "С вероятностью 30: пусть это будет истори про корпоративную работу."
-    )
+    # Load prompt from text file
+    prompt_file = os.path.join(os.path.dirname(__file__), "prompt.txt")
+    try:
+        with open(prompt_file, "r", encoding="utf-8") as f:
+            prompt_text = f.read()
+    except FileNotFoundError:
+        print(f"Error: Prompt file not found at {prompt_file}")
+        return "Error generating story: prompt file not found."
 
     response = client.responses.create(
         model="gpt-4o-mini",
