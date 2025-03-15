@@ -18,7 +18,7 @@ def generate_bibr_story():
         return "Error generating story: prompt file not found."
 
     response = client.responses.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         input=prompt_text,
         temperature=0.7,
         max_output_tokens=200,
